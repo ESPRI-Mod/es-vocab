@@ -1,0 +1,39 @@
+[project]
+name = "es-vocab"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Atef Ben Nasser", email = "atef.bennasser@ipsl.fr"},
+    {name = "Sébastien Gardoll", email = "sebastien.gardoll@ipsl.fr"},
+    {name = "Guillaume Levavasseur", email = "guillaume.levavasseur@ipsl.fr"},
+    {name = "Sven Rodriguez", email = "sven.rodriguez@ipsl.fr"},
+    {name = "Laurent Troussellier", email = "laurent.troussellier@ipsl.fr"},
+]
+dependencies = [
+    "linkml>=1.7.10",
+    "fastapi>=0.111.0",
+    "rdflib-endpoint[oxygraph]>=0.5.1",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pre-commit>=3.6.2",
+    "isort>=5.13.2",
+    "ruff>=0.5.1",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.isort]
+profile = "black"
