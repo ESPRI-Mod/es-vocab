@@ -13,6 +13,7 @@ dependencies = [
     "linkml>=1.7.10",
     "fastapi>=0.111.0",
     "rdflib-endpoint[oxygraph]>=0.5.1",
+    "pydantic>=2.8.2",
 ]
 requires-python = ">=3.12"
 readme = "README.md"
