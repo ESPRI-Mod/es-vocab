@@ -8,6 +8,8 @@ from pydantic import BaseModel
 
 import es_vocab.utils.naming as naming
 
+_LOGGER = logging.getLogger("cvs")
+
 
 def check_data_descriptor(data_descriptor_name: str) -> bool:
     return data_descriptor_name in TERMS_OF_UNIVERSE
@@ -18,9 +20,6 @@ def get_term(data_descriptor_name: str, term_id: str) -> BaseModel | None:
         return terms_of_data_descriptor.get(term_id, None)
     else:
         return None
-
-
-_LOGGER = logging.getLogger("cvs")
 
 
 def _get_classes_from_module(module) -> dict[str, type]:
@@ -48,7 +47,6 @@ def _load_pydantic_class(pydantic_module_file_path: Path) -> type:
 
 def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, BaseModel]]:
     result = dict()
-
     for data_descriptor_dir_path in universe_dir_path.iterdir():
         _LOGGER.debug(f"parse dir {data_descriptor_dir_path}")
         result[data_descriptor_dir_path.name] = dict()
@@ -68,7 +66,7 @@ def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, Bas
     return result
 
 
-def _parse_collections_of_project(project_dir_path: Path):
+def _parse_collections_of_project(project_dir_path: Path) -> dict[str : dict[str:BaseModel]]:
     result = dict()
     for collection_file_path in project_dir_path.glob("*.json"):
         _LOGGER.debug(f"parse collection: {collection_file_path}")
