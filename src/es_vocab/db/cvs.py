@@ -11,15 +11,31 @@ import es_vocab.utils.settings as settings
 _LOGGER = logging.getLogger("cvs")
 
 
+############################ CHECKERS ############################
+
+
 def check_data_descriptor(data_descriptor_name: str) -> bool:
     return data_descriptor_name in TERMS_OF_UNIVERSE
 
 
-def get_term(data_descriptor_name: str, term_id: str) -> BaseModel | None:
+############################# GETTERS ############################
+
+
+def get_term_in_universe(data_descriptor_name: str, term_id: str) -> BaseModel | None:
     if terms_of_data_descriptor := TERMS_OF_UNIVERSE.get(data_descriptor_name, None):
         return terms_of_data_descriptor.get(term_id, None)
     else:
         return None
+
+
+def get_term_in_project_collection(project_name: str, collection_name: str, term_id: str) -> BaseModel | None:
+    if project := TERMS_OF_COLLECTIONS_OF_PROJECTS.get(project_name, None):
+        if terms := project.get(collection_name, None):
+            return terms.get(term_id, None)
+    return None
+
+
+######################### PARSING FUNCTIONS #########################
 
 
 def _get_classes_from_module(module) -> dict[str, type]:
@@ -79,7 +95,7 @@ def _parse_collections_of_project(project_dir_path: Path) -> dict[str : dict[str
             if not check_data_descriptor(data_descriptor_name):
                 _LOGGER.error(f"can't find data descriptor {data_descriptor_name}")
                 break
-            term_from_universe = get_term(data_descriptor_name, term_id)
+            term_from_universe = get_term_in_universe(data_descriptor_name, term_id)
             if term_from_universe is None:
                 _LOGGER.error(f"can't find term {term_id} in data descriptor {data_descriptor_name}")
                 break
@@ -97,6 +113,8 @@ def _parse_projects(parent_projects_dir_path: Path) -> dict[str : dict[str : dic
         result[project_dir_path.name] = _parse_collections_of_project(project_dir_path)
     return result
 
+
+######################### DICTIONARIES #########################
 
 # dict[datadescriptor_name: dict[term id, term object]
 TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = _parse_terms_of_universe(settings.UNIVERSE_DIR_PATH)
