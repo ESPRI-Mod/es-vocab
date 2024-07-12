@@ -3,8 +3,8 @@ from pathlib import Path
 DIRNAME_AND_FILENAME_SEPARATOR = "_"
 
 # Paths:
-UNIVERSE_DIR_PATH = Path("../poc_repo_api/src/poc_repo_api/repos/Universe")
-PROJECTS_PARENT_DIR_PATH = Path("../poc_repo_api/src/poc_repo_api/repos/projects")
+UNIVERSE_DIR_PATH = Path("../universe")
+PROJECTS_PARENT_DIR_PATH = Path("../projects")
 PYDANTIC_MODEL_DIRNAME = "models"
 
 # JSON-LD node names:
