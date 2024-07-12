@@ -6,7 +6,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-import es_vocab.utils.naming as naming
+import es_vocab.utils.settings as settings
 
 _LOGGER = logging.getLogger("cvs")
 
@@ -31,7 +31,7 @@ def _get_classes_from_module(module) -> dict[str, type]:
 
 
 def _load_pydantic_class(pydantic_module_file_path: Path) -> type:
-    class_name = naming.from_pydantic_module_filepath_to_pydantic_class_name(pydantic_module_file_path)
+    class_name = settings.from_pydantic_module_filepath_to_pydantic_class_name(pydantic_module_file_path)
     try:
         spec = importlib.util.spec_from_file_location(name=class_name, location=pydantic_module_file_path)
         module = importlib.util.module_from_spec(spec)
@@ -50,7 +50,7 @@ def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, Bas
     for data_descriptor_dir_path in universe_dir_path.iterdir():
         _LOGGER.debug(f"parse dir {data_descriptor_dir_path}")
         result[data_descriptor_dir_path.name] = dict()
-        pydantic_class_module_file_path = naming.compute_pydantic_file_path_from_data_descriptor_dir_path(
+        pydantic_class_module_file_path = settings.compute_pydantic_file_path_from_data_descriptor_dir_path(
             data_descriptor_dir_path
         )
         pydantic_class = _load_pydantic_class(pydantic_class_module_file_path)
@@ -70,12 +70,12 @@ def _parse_collections_of_project(project_dir_path: Path) -> dict[str : dict[str
     result = dict()
     for collection_file_path in project_dir_path.glob("*.json"):
         _LOGGER.debug(f"parse collection: {collection_file_path}")
-        collection_name = naming.from_collection_file_path_to_collection_name(collection_file_path)
+        collection_name = settings.from_collection_file_path_to_collection_name(collection_file_path)
         result[collection_name] = dict()
         collection_content = json.loads(collection_file_path.read_text())
-        for term_specs_from_collection in collection_content[naming.COLLECTION_TERM_SPECS_LIST_NODE_NAME]:
-            term_id = term_specs_from_collection.pop(naming.ID_NODE_NAME)
-            data_descriptor_name = term_specs_from_collection.pop(naming.TYPE_NODE_NAME)
+        for term_specs_from_collection in collection_content[settings.COLLECTION_TERM_SPECS_LIST_NODE_NAME]:
+            term_id = term_specs_from_collection.pop(settings.ID_NODE_NAME)
+            data_descriptor_name = term_specs_from_collection.pop(settings.TYPE_NODE_NAME)
             if not check_data_descriptor(data_descriptor_name):
                 _LOGGER.error(f"can't find data descriptor {data_descriptor_name}")
                 break
@@ -99,9 +99,9 @@ def _parse_projects(parent_projects_dir_path: Path) -> dict[str : dict[str : dic
 
 
 # dict[datadescriptor_name: dict[term id, term object]
-TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = _parse_terms_of_universe(naming.UNIVERSE_DIR_PATH)
+TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = _parse_terms_of_universe(settings.UNIVERSE_DIR_PATH)
 
 # dict[project_name: dict[collection_name: dict[term_id: term object]]]
 TERMS_OF_COLLECTIONS_OF_PROJECTS: dict[str : dict[str : dict[str:BaseModel]]] = _parse_projects(
-    naming.PROJECTS_PARENT_DIR_PATH
+    settings.PROJECTS_PARENT_DIR_PATH
 )
