@@ -1,10 +1,10 @@
 from collections.abc import Callable
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import APIRouter, HTTPException, status
 
 import es_vocab.db.cvs as cvs
 
-app = FastAPI()
+router = APIRouter()
 
 
 def create_universe_term_end_point(datadescriptor_name: str) -> Callable:
@@ -19,7 +19,7 @@ def create_universe_term_end_point(datadescriptor_name: str) -> Callable:
 
 def create_universe_term_routes():
     for datadescriptor_name, _ in cvs.TERMS_OF_UNIVERSE.items():
-        app.add_api_route(
+        router.add_api_route(
             f"/{datadescriptor_name}/{{term_id}}",
             endpoint=create_universe_term_end_point(datadescriptor_name),
             methods=["GET"],
@@ -39,8 +39,8 @@ def create_project_term_end_point(project_name: str, collection_name: str) -> Ca
 def create_project_term_routes():
     for project_name, collection_contains in cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS.items():
         for collection_name, _ in collection_contains.items():
-            app.add_api_route(
+            router.add_api_route(
                 f"/{project_name}/{collection_name}/{{term_id}}",
-                endpoint=create_universe_term_end_point(project_name, collection_name),
+                endpoint=create_project_term_end_point(project_name, collection_name),
                 methods=["GET"],
             )
