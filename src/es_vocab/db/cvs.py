@@ -46,7 +46,8 @@ def _get_classes_from_module(module) -> dict[str, type]:
     return module_classes
 
 
-def _load_pydantic_class(pydantic_module_file_path: Path) -> type:
+def _load_pydantic_class(pydantic_module_file_path: Path) -> type | None:
+    result = None
     class_name = settings.from_pydantic_module_filepath_to_pydantic_class_name(pydantic_module_file_path)
     try:
         spec = importlib.util.spec_from_file_location(name=class_name, location=pydantic_module_file_path)
@@ -54,11 +55,11 @@ def _load_pydantic_class(pydantic_module_file_path: Path) -> type:
         spec.loader.exec_module(module)
         classes = _get_classes_from_module(module)
         result = classes[class_name]
-        return result
     except FileNotFoundError:
         _LOGGER.error(f"file {pydantic_module_file_path} not found")
     except KeyError:
         _LOGGER.error(f"class {class_name} not found in {pydantic_module_file_path}")
+    return result
 
 
 def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, BaseModel]]:
@@ -69,9 +70,10 @@ def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, Bas
         pydantic_class_module_file_path = settings.compute_pydantic_file_path_from_data_descriptor_dir_path(
             data_descriptor_dir_path
         )
-        pydantic_class = _load_pydantic_class(pydantic_class_module_file_path)
+        if (pydantic_class := _load_pydantic_class(pydantic_class_module_file_path)) is None:
+            continue
         _LOGGER.debug(f"found pydantic class: {pydantic_class}")
-        for term_file_path in data_descriptor_dir_path.glob("**/*.json"):
+        for term_file_path in data_descriptor_dir_path.glob("**/*.json"):  # FIXME: use terms directory!
             _LOGGER.debug(f"parse file {term_file_path}")
             try:
                 json_content_file = Path(term_file_path).read_text()
@@ -94,11 +96,11 @@ def _parse_collections_of_project(project_dir_path: Path) -> dict[str : dict[str
             data_descriptor_name = term_specs_from_collection.pop(settings.TYPE_NODE_NAME)
             if not check_data_descriptor(data_descriptor_name):
                 _LOGGER.error(f"can't find data descriptor {data_descriptor_name}")
-                break
+                continue
             term_from_universe = get_term_in_universe(data_descriptor_name, term_id)
             if term_from_universe is None:
                 _LOGGER.error(f"can't find term {term_id} in data descriptor {data_descriptor_name}")
-                break
+                continue
             # Process the keys left as additional information or superseeding values for the term.
             if term_specs_from_collection:
                 term_from_universe = term_from_universe.model_copy(update=term_specs_from_collection, deep=True)
@@ -117,9 +119,16 @@ def _parse_projects(parent_projects_dir_path: Path) -> dict[str : dict[str : dic
 ######################### DICTIONARIES #########################
 
 # dict[datadescriptor_name: dict[term id, term object]
-TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = _parse_terms_of_universe(settings.UNIVERSE_DIR_PATH)
+TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = None
 
 # dict[project_name: dict[collection_name: dict[term_id: term object]]]
-TERMS_OF_COLLECTIONS_OF_PROJECTS: dict[str : dict[str : dict[str:BaseModel]]] = _parse_projects(
-    settings.PROJECTS_PARENT_DIR_PATH
-)
+TERMS_OF_COLLECTIONS_OF_PROJECTS: dict[str : dict[str : dict[str:BaseModel]]] = None
+
+
+# Singleton
+def init():
+    global TERMS_OF_UNIVERSE
+    global TERMS_OF_COLLECTIONS_OF_PROJECTS
+    if TERMS_OF_UNIVERSE is None and TERMS_OF_COLLECTIONS_OF_PROJECTS is None:
+        TERMS_OF_UNIVERSE = _parse_terms_of_universe(settings.UNIVERSE_DIR_PATH)
+        TERMS_OF_COLLECTIONS_OF_PROJECTS = _parse_projects(settings.PROJECTS_PARENT_DIR_PATH)

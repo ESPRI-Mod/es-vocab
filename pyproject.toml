@@ -38,3 +38,8 @@ line-length = 120
 
 [tool.isort]
 profile = "black"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"

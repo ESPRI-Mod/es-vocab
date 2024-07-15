@@ -19,7 +19,7 @@ TYPE_NODE_NAME = "@type"
 #################################### LOGGING ########################################
 
 LOG_HANDLERS = [logging.StreamHandler(sys.stdout)]
-LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+LOG_FORMAT = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 LOG_LEVEL = logging.DEBUG
 
 logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT, handlers=LOG_HANDLERS)
