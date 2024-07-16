@@ -65,6 +65,10 @@ def _load_pydantic_class(pydantic_module_file_path: Path) -> type | None:
 def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, BaseModel]]:
     result = dict()
     for data_descriptor_dir_path in universe_dir_path.iterdir():
+        if data_descriptor_dir_path.stem[0]==".":
+            continue
+        if not data_descriptor_dir_path.is_dir():
+            continue
         _LOGGER.debug(f"parse dir {data_descriptor_dir_path}")
         result[data_descriptor_dir_path.name] = dict()
         pydantic_class_module_file_path = settings.compute_pydantic_file_path_from_data_descriptor_dir_path(
