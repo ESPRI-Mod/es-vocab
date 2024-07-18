@@ -7,7 +7,7 @@ from pathlib import Path
 DIRNAME_AND_FILENAME_SEPARATOR = "_"
 
 # Paths in universe repository:
-UNIVERSE_DIR_PATH = Path("../universe")
+UNIVERSE_DIR_PATH = Path("../WGCM_CVs")
 PYDANTIC_MODEL_DIRNAME = "models"
 TERMS_DIRNAME = "terms"
 
