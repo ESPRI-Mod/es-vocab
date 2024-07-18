@@ -77,7 +77,7 @@ def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, Bas
         if (pydantic_class := _load_pydantic_class(pydantic_class_module_file_path)) is None:
             continue
         _LOGGER.debug(f"found pydantic class: {pydantic_class}")
-
+        DATA_DESCRIPTOR_CLASS[data_descriptor_dir_path.name] = pydantic_class
         term_dir_path = settings.compute_terms_dir_path_from_data_descriptor_dir_path(data_descriptor_dir_path)
         for term_file_path in term_dir_path.glob("*.json"):
             _LOGGER.debug(f"parse file {term_file_path}")
@@ -124,11 +124,14 @@ def _parse_projects(parent_projects_dir_path: Path) -> dict[str : dict[str : dic
 
 ######################### DICTIONARIES #########################
 
-# dict[datadescriptor_name: dict[term id, term object]
+# dict[data_descriptor_name: dict[term id, term object]
 TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = None
 
 # dict[project_name: dict[collection_name: dict[term_id: term object]]]
 TERMS_OF_COLLECTIONS_OF_PROJECTS: dict[str : dict[str : dict[str:BaseModel]]] = None
+
+# dict[data_descriptor_name: class]
+DATA_DESCRIPTOR_CLASS: dict[str:type] = dict()
 
 
 # Singleton

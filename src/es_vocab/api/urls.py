@@ -52,12 +52,12 @@ def create_universe_term_end_point(datadescriptor_name: str) -> Callable:
     return _end_point
 
 
-# TODO: provide response_model based on the pydantic class associated to the data descriptor.
 def create_universe_term_routes():
     for datadescriptor_name, _ in cvs.TERMS_OF_UNIVERSE.items():
         router.add_api_route(
-            f"/{datadescriptor_name}/{{term_id}}",
+            path=f"/{datadescriptor_name}/{{term_id}}",
             endpoint=create_universe_term_end_point(datadescriptor_name),
+            response_model=cvs.DATA_DESCRIPTOR_CLASS[datadescriptor_name],
             methods=["GET"],
         )
 
