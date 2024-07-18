@@ -1,17 +1,11 @@
 from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel
 
 import es_vocab.db.cvs as cvs
 
 router = APIRouter(prefix="/api")
 
 # TODO: support case sensitive and not ???
-
-# TODO:
-# Return the path at the same time:
-# @router.get('/universe/term/{term_id}') # Return the dictionary of the terms that match the specified term id within the universe.
-# @router.get('/project/term/{term_id}') # Return the dictionary of the terms that match the specified term id within all projects.
-# @router.get('/term/{term_id}') # Return the dictionary of the terms that match the specified term id within the universe and all projects.
-# @router.get('/collection/{collection_name}') # Return the dictionary of the collection names that match the specified collection name within all projects.
 
 
 # Return the list of the data descriptor names.
@@ -114,3 +108,85 @@ async def get_term_from_collection(project_name: str, collection_name: str, term
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"term {term_id} not found in collection {collection_name} from project {project_name}",
         )
+
+
+def _format_general_item_search(term: BaseModel, path: str, item_name: str) -> dict:
+    return {item_name: term, "path": path}
+
+
+def _search_term_in_universe(term_id: str) -> list[dict]:
+    result = list()
+    for data_descriptor_name, terms in cvs.TERMS_OF_UNIVERSE.items():
+        if term_id in terms:
+            result.append(
+                _format_general_item_search(
+                    terms[term_id], f"/universe/datadescriptor/{data_descriptor_name}/term/{term_id}", "term"
+                )
+            )
+    return result
+
+
+def _search_term_in_all_projects(term_id: str) -> list[dict]:
+    result = list()
+    for project_name, collections in cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS.items():
+        for collection_name, collection in collections.items():
+            if term_id in collection:
+                result.append(
+                    _format_general_item_search(
+                        collection[term_id],
+                        f"/project/{project_name}/collection/{collection_name}/term/{term_id}",
+                        "term",
+                    )
+                )
+    return result
+
+
+# Return the terms that match the specified term id within the universe.
+@router.get("/universe/term/{term_id}")
+async def search_term_in_universe(term_id: str) -> list[dict]:
+    result = _search_term_in_universe(term_id)
+    if not result:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"term {term_id} not found in universe")
+    return result
+
+
+# Return the terms that match the specified term id within all the projects.
+@router.get("/project/term/{term_id}")
+async def search_term_in_all_projects(term_id: str) -> list[dict]:
+    result = _search_term_in_all_projects(term_id)
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"term {term_id} not found accross the projects"
+        )
+    return result
+
+
+# Return the terms that match the specified term id within the universe and all projects.
+@router.get("/term/{term_id}")
+async def search_term_in_universe_and_all_projects(term_id: str) -> list[dict]:
+    result = _search_term_in_universe(term_id)
+    result.extend(_search_term_in_all_projects(term_id))
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"term {term_id} not found accross the universe and the projects",
+        )
+    return result
+
+
+# Return the collection names that match the specified collection name within all projects.
+@router.get("/collection/{collection_name}")
+async def search_collection_in_all_projects(collection_name: str) -> list[dict]:
+    result = list()
+    for project_name, collections in cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS.items():
+        if collection_name in collections:
+            result.append(
+                _format_general_item_search(
+                    collection_name, f"/project/{project_name}/collection/{collection_name}", "collection_name"
+                )
+            )
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"collection {collection_name} not found accross the projects"
+        )
+    return result
