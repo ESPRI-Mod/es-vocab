@@ -6,10 +6,13 @@ from pathlib import Path
 
 DIRNAME_AND_FILENAME_SEPARATOR = "_"
 
-# Paths:
+# Paths in universe repository:
 UNIVERSE_DIR_PATH = Path("../universe")
-PROJECTS_PARENT_DIR_PATH = Path("../projects")
 PYDANTIC_MODEL_DIRNAME = "models"
+TERMS_DIRNAME = "terms"
+
+# Paths in project repositories:
+PROJECTS_PARENT_DIR_PATH = Path("../projects")
 
 # JSON-LD node names:
 COLLECTION_TERM_SPECS_LIST_NODE_NAME = "@graph"
@@ -34,6 +37,10 @@ def from_pydantic_module_filepath_to_pydantic_class_name(file_path: Path) -> str
 
 def compute_pydantic_file_path_from_data_descriptor_dir_path(dir_path: Path) -> Path:
     return dir_path.joinpath(PYDANTIC_MODEL_DIRNAME).joinpath(f"{dir_path.name}.py")
+
+
+def compute_terms_dir_path_from_data_descriptor_dir_path(dir_path: Path) -> Path:
+    return dir_path.joinpath(TERMS_DIRNAME)
 
 
 def from_collection_file_path_to_collection_name(file_path: Path) -> str:

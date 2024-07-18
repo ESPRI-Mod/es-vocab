@@ -65,7 +65,7 @@ def _load_pydantic_class(pydantic_module_file_path: Path) -> type | None:
 def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, BaseModel]]:
     result = dict()
     for data_descriptor_dir_path in universe_dir_path.iterdir():
-        if data_descriptor_dir_path.stem[0]==".":
+        if data_descriptor_dir_path.stem[0] == ".":
             continue
         if not data_descriptor_dir_path.is_dir():
             continue
@@ -77,7 +77,9 @@ def _parse_terms_of_universe(universe_dir_path: Path) -> dict[str, dict[str, Bas
         if (pydantic_class := _load_pydantic_class(pydantic_class_module_file_path)) is None:
             continue
         _LOGGER.debug(f"found pydantic class: {pydantic_class}")
-        for term_file_path in data_descriptor_dir_path.glob("**/*.json"):  # FIXME: use terms directory!
+
+        term_dir_path = settings.compute_terms_dir_path_from_data_descriptor_dir_path(data_descriptor_dir_path)
+        for term_file_path in term_dir_path.glob("*.json"):
             _LOGGER.debug(f"parse file {term_file_path}")
             try:
                 json_content_file = Path(term_file_path).read_text()
