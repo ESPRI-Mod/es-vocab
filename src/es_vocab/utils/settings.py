@@ -43,5 +43,5 @@ def compute_terms_dir_path_from_data_descriptor_dir_path(dir_path: Path) -> Path
     return dir_path.joinpath(TERMS_DIRNAME)
 
 
-def from_collection_file_path_to_collection_name(file_path: Path) -> str:
+def from_collection_file_path_to_collection_id(file_path: Path) -> str:
     return file_path.stem

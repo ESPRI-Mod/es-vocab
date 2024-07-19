@@ -14,23 +14,23 @@ _LOGGER = logging.getLogger("cvs")
 ############################ CHECKERS ############################
 
 
-def check_data_descriptor(data_descriptor_name: str) -> bool:
-    return data_descriptor_name in TERMS_OF_UNIVERSE
+def check_data_descriptor(data_descriptor_id: str) -> bool:
+    return data_descriptor_id in TERMS_OF_UNIVERSE
 
 
 ############################# GETTERS ############################
 
 
-def get_term_in_universe(data_descriptor_name: str, term_id: str) -> BaseModel | None:
-    if terms_of_data_descriptor := TERMS_OF_UNIVERSE.get(data_descriptor_name, None):
+def get_term_in_universe(data_descriptor_id: str, term_id: str) -> BaseModel | None:
+    if terms_of_data_descriptor := TERMS_OF_UNIVERSE.get(data_descriptor_id, None):
         return terms_of_data_descriptor.get(term_id, None)
     else:
         return None
 
 
-def get_term_in_project_collection(project_name: str, collection_name: str, term_id: str) -> BaseModel | None:
-    if project := TERMS_OF_COLLECTIONS_OF_PROJECTS.get(project_name, None):
-        if terms := project.get(collection_name, None):
+def get_term_in_project_collection(project_id: str, collection_id: str, term_id: str) -> BaseModel | None:
+    if project := TERMS_OF_COLLECTIONS_OF_PROJECTS.get(project_id, None):
+        if terms := project.get(collection_id, None):
             return terms.get(term_id, None)
     return None
 
@@ -94,23 +94,23 @@ def _parse_collections_of_project(project_dir_path: Path) -> dict[str : dict[str
     result = dict()
     for collection_file_path in project_dir_path.glob("*.json"):
         _LOGGER.debug(f"parse collection: {collection_file_path}")
-        collection_name = settings.from_collection_file_path_to_collection_name(collection_file_path)
-        result[collection_name] = dict()
+        collection_id = settings.from_collection_file_path_to_collection_id(collection_file_path)
+        result[collection_id] = dict()
         collection_content = json.loads(collection_file_path.read_text())
         for term_specs_from_collection in collection_content[settings.COLLECTION_TERM_SPECS_LIST_NODE_NAME]:
             term_id = term_specs_from_collection.pop(settings.ID_NODE_NAME)
-            data_descriptor_name = term_specs_from_collection.pop(settings.TYPE_NODE_NAME)
-            if not check_data_descriptor(data_descriptor_name):
-                _LOGGER.error(f"can't find data descriptor {data_descriptor_name}")
+            data_descriptor_id = term_specs_from_collection.pop(settings.TYPE_NODE_NAME)
+            if not check_data_descriptor(data_descriptor_id):
+                _LOGGER.error(f"can't find data descriptor {data_descriptor_id}")
                 continue
-            term_from_universe = get_term_in_universe(data_descriptor_name, term_id)
+            term_from_universe = get_term_in_universe(data_descriptor_id, term_id)
             if term_from_universe is None:
-                _LOGGER.error(f"can't find term {term_id} in data descriptor {data_descriptor_name}")
+                _LOGGER.error(f"can't find term {term_id} in data descriptor {data_descriptor_id}")
                 continue
             # Process the keys left as additional information or superseeding values for the term.
             if term_specs_from_collection:
                 term_from_universe = term_from_universe.model_copy(update=term_specs_from_collection, deep=True)
-            result[collection_name][term_id] = term_from_universe
+            result[collection_id][term_id] = term_from_universe
     return result
 
 
@@ -124,13 +124,13 @@ def _parse_projects(parent_projects_dir_path: Path) -> dict[str : dict[str : dic
 
 ######################### DICTIONARIES #########################
 
-# dict[data_descriptor_name: dict[term id, term object]
+# dict[data_descriptor_id: dict[term id, term object]
 TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = None
 
-# dict[project_name: dict[collection_name: dict[term_id: term object]]]
+# dict[project_id: dict[collection_id: dict[term_id: term object]]]
 TERMS_OF_COLLECTIONS_OF_PROJECTS: dict[str : dict[str : dict[str:BaseModel]]] = None
 
-# dict[data_descriptor_name: class]
+# dict[data_descriptor_id: class]
 DATA_DESCRIPTOR_CLASS: dict[str:type] = dict()
 
 
