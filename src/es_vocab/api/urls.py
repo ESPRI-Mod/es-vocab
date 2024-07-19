@@ -42,10 +42,10 @@ def format_term(term: BaseModel, accept_type: str) -> JSONResponse | HTMLRespons
         return HTMLResponse(from_json_to_html(term))
 
 
-def create_universe_term_end_point(datadescriptor_name: str) -> Callable:
+def create_universe_term_end_point(data_descriptor_id: str) -> Callable:
     def _end_point(term_id: str, accept: Annotated[str | None, Header()]):
-        if term_id in cvs.TERMS_OF_UNIVERSE[datadescriptor_name]:
-            return format_term(cvs.TERMS_OF_UNIVERSE[datadescriptor_name][term_id], accept)
+        if term_id in cvs.TERMS_OF_UNIVERSE[data_descriptor_id]:
+            return format_term(cvs.TERMS_OF_UNIVERSE[data_descriptor_id][term_id], accept)
         else:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="term not found")
 
@@ -53,19 +53,19 @@ def create_universe_term_end_point(datadescriptor_name: str) -> Callable:
 
 
 def create_universe_term_routes():
-    for datadescriptor_name, _ in cvs.TERMS_OF_UNIVERSE.items():
+    for data_descriptor_id, _ in cvs.TERMS_OF_UNIVERSE.items():
         router.add_api_route(
-            path=f"/{datadescriptor_name}/{{term_id}}",
-            endpoint=create_universe_term_end_point(datadescriptor_name),
-            response_model=cvs.DATA_DESCRIPTOR_CLASS[datadescriptor_name],
+            path=f"/{data_descriptor_id}/{{term_id}}",
+            endpoint=create_universe_term_end_point(data_descriptor_id),
+            response_model=cvs.DATA_DESCRIPTOR_CLASS[data_descriptor_id],
             methods=["GET"],
         )
 
 
-def create_project_term_end_point(project_name: str, collection_name: str) -> Callable:
+def create_project_term_end_point(project_id: str, collection_id: str) -> Callable:
     def _end_point(term_id: str, accept: Annotated[str | None, Header()]):
-        if term_id in cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS[project_name][collection_name]:
-            return format_term(cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS[project_name][collection_name][term_id], accept)
+        if term_id in cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS[project_id][collection_id]:
+            return format_term(cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS[project_id][collection_id][term_id], accept)
         else:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="term not found")
 
@@ -73,10 +73,10 @@ def create_project_term_end_point(project_name: str, collection_name: str) -> Ca
 
 
 def create_project_term_routes():
-    for project_name, collection_contains in cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS.items():
-        for collection_name, _ in collection_contains.items():
+    for project_id, collection_contains in cvs.TERMS_OF_COLLECTIONS_OF_PROJECTS.items():
+        for collection_id, _ in collection_contains.items():
             router.add_api_route(
-                f"/{project_name}/{collection_name}/{{term_id}}",
-                endpoint=create_project_term_end_point(project_name, collection_name),
+                f"/{project_id}/{collection_id}/{{term_id}}",
+                endpoint=create_project_term_end_point(project_id, collection_id),
                 methods=["GET"],
             )
