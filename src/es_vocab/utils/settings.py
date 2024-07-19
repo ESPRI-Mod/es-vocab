@@ -8,11 +8,13 @@ DIRNAME_AND_FILENAME_SEPARATOR = "_"
 
 # Paths in universe repository:
 UNIVERSE_DIR_PATH = Path("../WGCM_CVs")
+DATA_DESCRIPTORS_PARENT_DIR_PATH = UNIVERSE_DIR_PATH.joinpath("data_descriptors")
 PYDANTIC_MODEL_DIRNAME = "models"
 TERMS_DIRNAME = "terms"
 
 # Paths in project repositories:
 PROJECTS_PARENT_DIR_PATH = Path("../projects")
+COLLECTIONS_DIRNAME = "collections"
 
 # JSON-LD node names:
 COLLECTION_TERM_SPECS_LIST_NODE_NAME = "@graph"

@@ -6,7 +6,7 @@ def test_universe_and_project(caplog):
     caplog.clear()
 
     # Test universe parsing first and stop in any case of error to avoid side effects with project parsing.
-    cvs.TERMS_OF_UNIVERSE = cvs._parse_terms_of_universe(settings.UNIVERSE_DIR_PATH)
+    cvs.TERMS_OF_UNIVERSE = cvs._parse_terms_of_universe(settings.DATA_DESCRIPTORS_PARENT_DIR_PATH)
     assert (cvs.TERMS_OF_UNIVERSE is not None) and (len(cvs.TERMS_OF_UNIVERSE) > 0)
     count_error_tags = caplog.text.count("ERROR")
     assert count_error_tags == 0

@@ -117,8 +117,10 @@ def _parse_collections_of_project(project_dir_path: Path) -> dict[str : dict[str
 def _parse_projects(parent_projects_dir_path: Path) -> dict[str : dict[str : dict[str:BaseModel]]]:
     result = dict()
     for project_dir_path in parent_projects_dir_path.iterdir():
-        _LOGGER.debug(f"parse project: {project_dir_path}")
-        result[project_dir_path.name] = _parse_collections_of_project(project_dir_path)
+        _LOGGER.debug(f"parse collections of project: {project_dir_path}")
+        result[project_dir_path.name] = _parse_collections_of_project(
+            project_dir_path.joinpath(settings.COLLECTIONS_DIRNAME)
+        )
     return result
 
 
@@ -139,5 +141,5 @@ def init():
     global TERMS_OF_UNIVERSE
     global TERMS_OF_COLLECTIONS_OF_PROJECTS
     if TERMS_OF_UNIVERSE is None and TERMS_OF_COLLECTIONS_OF_PROJECTS is None:
-        TERMS_OF_UNIVERSE = _parse_terms_of_universe(settings.UNIVERSE_DIR_PATH)
+        TERMS_OF_UNIVERSE = _parse_terms_of_universe(settings.DATA_DESCRIPTORS_PARENT_DIR_PATH)
         TERMS_OF_COLLECTIONS_OF_PROJECTS = _parse_projects(settings.PROJECTS_PARENT_DIR_PATH)
