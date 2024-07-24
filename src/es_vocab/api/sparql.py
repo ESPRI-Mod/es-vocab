@@ -2,8 +2,10 @@ from rdflib_endpoint import SparqlRouter
 from rdflib import Graph
 import es_vocab.db.cvs as cvs
 
+import es_vocab.utils.settings as settings
+
 g = Graph()
-g.parse(cvs.GRAPH_PATH / "es-vocab.ttl")
+g.parse(settings.GRAPH_PATH / "es-vocab.ttl")
 
 
 sparql_router = SparqlRouter(
