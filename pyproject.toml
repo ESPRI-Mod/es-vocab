@@ -11,9 +11,10 @@ authors = [
 ]
 dependencies = [
     "fastapi>=0.111.0",
-    "rdflib-endpoint[oxygraph]>=0.5.1",
+    "rdflib-endpoint>=0.5.1",
     "pydantic>=2.8.2",
     "pytest>=8.3.1",
+    "rdflib>=7.0.0",
 ]
 requires-python = "==3.12.3"
 readme = "README.md"
