@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 import es_vocab.api.urls as urls
 import es_vocab.db.cvs as cvs
@@ -18,6 +19,7 @@ def create_app() -> FastAPI:
     api_app = create_api_app()
     app.include_router(api_app.router)
     app.include_router(spq.sparql_router)
+    app.mount("/", StaticFiles(directory="documentation/site", html=True), name="site")
     return app
 
 

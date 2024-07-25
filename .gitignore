@@ -30,3 +30,4 @@ MANIFEST
 *.sqlite3
 *.duckdb
 pdm.lock
+site/
