@@ -33,7 +33,9 @@ async def handle_webhook(request: Request):
     # Verify the signature
     verify_signature(body, request.headers)
     try:
-        result = subprocess.run(["/dock/deploy_new"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        with open("/maj/havetorestart", "w") as f:
+            f.write("go")
+
         return {"status": "success", "output": result.stdout.decode()}
     except subprocess.CalledProcessError as e:
         raise HTTPException(status_code=500, detail=f"Script failed with error: {e.stderr.decode()}")
