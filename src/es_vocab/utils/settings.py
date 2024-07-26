@@ -24,6 +24,7 @@ COLLECTION_TERM_SPECS_LIST_NODE_NAME = "@graph"
 ID_NODE_NAME = "@id"
 TYPE_NODE_NAME = "@type"
 
+SECRET_TOKEN = "tobereplaced"
 #################################### LOGGING ########################################
 
 LOG_HANDLERS = [logging.StreamHandler(sys.stdout)]
