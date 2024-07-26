@@ -34,7 +34,7 @@ async def handle_webhook(request: Request):
     verify_signature(body, request.headers)
     try:
         with open("/maj/havetorestart", "w") as f:
-            f.write("go")
+            f.write("g")
 
         return {"status": "success", "output": result.stdout.decode()}
     except subprocess.CalledProcessError as e:
