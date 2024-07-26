@@ -34,11 +34,11 @@ async def handle_webhook(request: Request):
     verify_signature(body, request.headers)
     try:
         with open("/maj/havetorestart", "w") as f:
-            f.write("g")
+            f.write("go")
 
         return {"status": "success", "output": result.stdout.decode()}
-    except subprocess.CalledProcessError as e:
-        raise HTTPException(status_code=500, detail=f"Script failed with error: {e.stderr.decode()}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Script failed with error: {e}")
 
      
     return {"status": "success", "message": "Webhook received and verified"}
