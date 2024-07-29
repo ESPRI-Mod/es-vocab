@@ -2,6 +2,7 @@ from fastapi import APIRouter, Request, HTTPException
 import hmac
 import hashlib
 from es_vocab.utils.settings import SECRET_TOKEN
+import json
 
 router = APIRouter(prefix="/webhook")
 # Replace 'your-secret-token' with the actual secret token you entered in the GitHub webhook settings
@@ -34,7 +35,7 @@ async def handle_webhook(request: Request):
     verify_signature(body, request.headers)
 
     # Verify branch main ?
-    payload= request.body
+    payload = json.loads(body)
     if not payload.get('ref') == 'refs/heads/main':
         raise HTTPException(status_code=501, detail="push not on main")
 
