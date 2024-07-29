@@ -4,5 +4,5 @@ nav:
   - API: 'restapi.md'
   - SPARQL : 'sparqlendpoint.md'
   - WebSite : 'website.md'
-  - API_example : 'restapi_py.md' 
+  - API_example : 'api_basics.html' 
  
