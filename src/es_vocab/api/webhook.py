@@ -32,11 +32,18 @@ async def handle_webhook(request: Request):
     
     # Verify the signature
     verify_signature(body, request.headers)
+
+    # Verify branch main ?
+    payload= request.body
+    if not payload.get('ref') == 'refs/heads/main':
+        raise HTTPException(status_code=501, detail="push not on main")
+
+
     try:
         with open("/maj/havetorestart", "w") as f:
             f.write("go")
 
-        return {"status": "success", "output": result.stdout.decode()}
+        return {"status": "success"}  
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Script failed with error: {e}")
 
