@@ -20,9 +20,14 @@ Using the REST API provides several benefits:
 The REST API is hosted at [http://es-vocab.ipsl.fr](http://es-vocab.ipsl.fr). Below are some common usage examples and endpoints.
 
 ### Endpoints
+#### Swagger api documentation 
 
-#### Retrieve Term Metadata
+[http://es-vocab.ipsl.fr/docs](http://es-vocab.ipsl.fr/docs)
+
+#### Retrieve institution Term Metadata
 
 ```http
-GET /api/v1/terms/{term_id}
+curl -X 'GET' \
+  'http://es-vocab.ipsl.fr/api/universe/datadescriptor/institution/term' \
+  -H 'accept: application/json'
 ```
