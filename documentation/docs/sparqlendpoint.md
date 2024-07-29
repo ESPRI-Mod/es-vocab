@@ -10,7 +10,24 @@ The SPARQL endpoint enhances websemantic interoperability by enabling users to p
 ## How
 To utilize the SPARQL endpoint, simply send your SPARQL queries to the provided endpoint URL. These queries can be used to retrieve, filter, and manipulate the vocabulary data according to your needs.
 
-**Example Endpoint:**
+# YASGUI interface
 
-`https://es-vocab.example.com/sparql`
+you can find a yasgui interface : [https://es-vocab.ipsl.fr/sparql](http://es-vocab.ipsl.fr/sparql)
+
+## Basic query 
+
+To get all triples in graph :
+
+```http
+SELECT * 
+WHERE {?s ?p ?o .}
+```
+
+## Insitution query
+
+```http
+
+SELECT *
+WHERE {?s <http://es-vocab.ipsl.fr/institution/acronyms> ?o .}
+```
 
