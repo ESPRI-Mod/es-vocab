@@ -246,3 +246,119 @@ if validation step went well, create a pull request. This will be merged into ma
 
 github repository is configured to send a message to the CV Service. It will be update automaticaly !!! 
 
+## Define projects collection
+
+Each project does not necesseraly use or even valid all the terms in the univers data descriptor. collections of valid id have to be define in each project : 
+
+for instance, we will add activity collection id for CMIP6Plus_CVs : 
+
+### clone the repo
+
+```
+git clone https://github.com/ESPRI-Mod/CMIP6Plus_CVs.git
+```
+
+### create a new branch
+
+```
+git checkout -b activity
+```
+
+### create collection
+
+in directory collections :
+Lets start from the institution.json and copy it as activity.json
+
+```
+{
+"@context":{ 
+    "@base": "http://es-vocab.ipsl.fr/Institution"
+	},
+"@graph":[
+  {"@id":"ipsl",
+   "@type":"institution",
+   "name" : "Institut Pierre-Simon Laplace modified", 
+   "location":{
+       "city":"Paris5"
+	    },
+    "myprop":"42"
+  },
+  {
+    "@id":"llnl",
+    "@type":"institution"}
+	]
+}
+```
+
+this one is a show case to view the possibility to change metadata from universe or even add a new key in the metadata. The CV_service takes into account this specifity ! 
+
+
+so for the activity, we can use the terms in universe as it. 
+
+* change the context : just change the end of the "base" into the data descriptor name :
+
+```
+"@base": "http://es-vocab.ipsl.fr/Activity"
+	}
+```
+
+* in the graph, add the list of id from universe that we need for CMIP6Plus. For now there are only 2 ( CMIP, LESFMIP). We will do it by hand. 
+
+```
+{
+"@context":{ 
+    "@base": "http://es-vocab.ipsl.fr/Activity"
+	},
+"@graph":[
+  {"@id":"cmip",
+   "@type":"activity"
+     },
+  {
+    "@id":"lesmip",
+    "@type":"activity"}
+	]
+}
+```
+
+### push change
+
+```
+git add .
+git commmit -m "add activity collection"
+git push --set upstream origin activity
+```
+
+and create pull request in github interface that will be done asap.
+
+### let Magic happen 
+
+the github CI/CD will inform the CV service to restart. 
+
+
+### Test it
+
+to test the cv service is up to date, we will use a simple curl to the API. documentation about the api is here : [http://es-vocab.ipsl.fr/docs](http://es-vocab.ipsl.fr/docs)  
+
+```
+
+curl -X 'GET' \                                                             
+  'http://es-vocab.ipsl.fr/api/project/CMIP6Plus_CVs/collection/activity/term' \
+  -H 'accept: application/json'
+```
+
+2 problems : 
+* activity in CMIP6 in fact **activity_id**. Just change the name of the collection file. It will still select id from the **activity** data descriptor in WGCM_CVs
+
+* there is not lesmip, it is a type during the procedure. it is lesfmip. Change the id inside the collection
+
+```
+curl -X 'GET' \                                                             
+  'http://es-vocab.ipsl.fr/api/project/CMIP6Plus_CVs/collection/activity_id/term' \
+  -H 'accept: application/json'
+```
+result : 
+
+["cmip","lesfmip"] 
+
+Perfect ! 
+
