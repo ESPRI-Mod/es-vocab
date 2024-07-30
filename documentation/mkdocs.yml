@@ -5,4 +5,5 @@ nav:
   - SPARQL : 'sparqlendpoint.md'
   - WebSite : 'website.md'
   - API_example : 'api_basics.html' 
- 
+  - Admin : 
+      - Datadescriptor creation : 'DD_creation_example.md'
