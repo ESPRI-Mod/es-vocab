@@ -26,7 +26,7 @@ def _get_all_term_from_data_descriptor(data_descriptor_id: str) -> list:
 # Check a data descriptor.
 @router.get("/universe/datadescriptor/{data_descriptor_id}")
 def check_data_descriptor_id(data_descriptor_id: str):
-    _get_all_term_from_data_descriptor(data_descriptor_id)
+    return _get_all_term_from_data_descriptor(data_descriptor_id)
 
 
 # Return the list of the terms in the specified data descriptor.
@@ -87,7 +87,7 @@ async def get_all_collections_from_project(project_id: str) -> list:
 
 @router.get("/project/{project_id}/collection/{collection_id}")
 async def check_collection_id(project_id: str, collection_id: str):
-    _get_collection(project_id, collection_id)
+    return _get_collection(project_id, collection_id)
 
 
 # Return the list of the terms in the specified collection within the specified project.
