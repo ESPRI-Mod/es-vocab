@@ -27,7 +27,7 @@ def verify_signature(request_body: bytes, headers):
     if not hmac.compare_digest(mac.hexdigest(), signature):
         raise HTTPException(status_code=400, detail="Invalid signature")
 
-@router.post("/repoupdate")
+@router.post("/repoupdate",include_in_schema=False)
 async def handle_webhook(request: Request):
     body = await request.body()
     
