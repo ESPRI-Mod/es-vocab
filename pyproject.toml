@@ -1,7 +1,7 @@
 [project]
 name = "es-vocab"
 version = "0.1.0"
-description = "Default template for PDM package"
+description = "ES-VOCAB"
 authors = [
     {name = "Atef Ben Nasser", email = "atef.bennasser@ipsl.fr"},
     {name = "Sébastien Gardoll", email = "sebastien.gardoll@ipsl.fr"},
