@@ -18,13 +18,17 @@ COLLECTIONS_DIRNAME = "collections"
 
 # rdf graph path
 GRAPH_PATH = Path("WGCM_CVs/graph")
-print(GRAPH_PATH)
+
 # JSON-LD node names:
 COLLECTION_TERM_SPECS_LIST_NODE_NAME = "@graph"
 ID_NODE_NAME = "@id"
 TYPE_NODE_NAME = "@type"
 
 SECRET_TOKEN = "tobereplaced"
+
+# API Server settings
+API_SERVER_DOMAINE_NAME = "es-vocab.ipsl.fr"
+
 #################################### LOGGING ########################################
 
 LOG_HANDLERS = [logging.StreamHandler(sys.stdout)]
