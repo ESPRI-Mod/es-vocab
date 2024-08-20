@@ -7,6 +7,7 @@ __pycache__
 *.log*
 # pixi environments
 .pixi
+.pdm-python
 
 # Distribution / packaging
 .Python
