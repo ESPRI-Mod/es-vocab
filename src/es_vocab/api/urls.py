@@ -1,5 +1,5 @@
 from collections.abc import Callable
-from typing import Annotated
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Header, HTTPException, status
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -10,7 +10,7 @@ import es_vocab.db.cvs as cvs
 router = APIRouter()
 
 
-def to_str(value: any) -> str:
+def to_str(value: list | dict | Any) -> str:
     result = ""
     if isinstance(value, list):
         match len(value):
@@ -35,8 +35,8 @@ def from_json_to_html(json_obj: BaseModel) -> str:
     return result
 
 
-def format_term(term: BaseModel, accept_type: str) -> JSONResponse | HTMLResponse:
-    if "application/json" in accept_type:
+def format_term(term: BaseModel, accept_type: str | None) -> JSONResponse | HTMLResponse:
+    if accept_type is not None and "application/json" in accept_type:
         return JSONResponse(term.model_dump_json())
     else:
         return HTMLResponse(from_json_to_html(term))
