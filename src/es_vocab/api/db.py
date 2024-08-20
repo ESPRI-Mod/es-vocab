@@ -1,3 +1,5 @@
+from typing import Any
+
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
@@ -14,7 +16,7 @@ async def get_all_data_descriptor_ids() -> list:
     return list(cvs.TERMS_OF_UNIVERSE.keys())
 
 
-def _get_all_term_from_data_descriptor(data_descriptor_id: str) -> list:
+def _get_all_term_from_data_descriptor(data_descriptor_id: str) -> dict[str, BaseModel]:
     if term_specs := cvs.TERMS_OF_UNIVERSE.get(data_descriptor_id, None):
         return term_specs
     else:
@@ -110,8 +112,8 @@ async def get_term_from_collection(project_id: str, collection_id: str, term_id:
         )
 
 
-def _format_general_item_search(term: BaseModel, path: str, item_name: str) -> dict:
-    return {item_name: term, "path": path}
+def _format_general_item_search(item: Any, path: str, item_name: str) -> dict:
+    return {item_name: item, "path": path}
 
 
 def _search_term_in_universe(term_id: str) -> list[dict]:
