@@ -42,7 +42,7 @@ async def handle_webhook(request: Request):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="push in main is not allowed")
 
     try:
-        with open("/update/havetorestart", "w") as f:
+        with open("/update/have_to_restart", "w") as f:
             f.write("1")
 
         return {"status": "success", "message": "Webhook received and verified"}
