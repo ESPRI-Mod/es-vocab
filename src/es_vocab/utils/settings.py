@@ -16,8 +16,9 @@ TERMS_DIRNAME = "terms"
 PROJECTS_PARENT_DIR_PATH = Path("../projects")
 COLLECTIONS_DIRNAME = "collections"
 
-# rdf graph path
-GRAPH_PATH = Path("WGCM_CVs/graph")
+# RDF:
+GRAPH_DIRNAME = "graph"
+GRAPH_DIR_PATH = UNIVERSE_DIR_PATH.joinpath(GRAPH_DIRNAME)
 
 # JSON-LD node names:
 COLLECTION_TERM_SPECS_LIST_NODE_NAME = "@graph"

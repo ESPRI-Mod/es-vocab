@@ -6,7 +6,7 @@ import es_vocab.utils.settings as settings
 SPARQL_ROOT_PATH = "/sparql"
 
 g = Graph()
-g.parse(settings.GRAPH_PATH / "es-vocab.ttl")
+g.parse(settings.GRAPH_DIR_PATH / "es-vocab.ttl")
 
 
 sparql_router = SparqlRouter(
