@@ -45,8 +45,6 @@ async def handle_webhook(request: Request):
         with open("/update/havetorestart", "w") as f:
             f.write("1")
 
-        return {"status": "success"}
+        return {"status": "success", "message": "Webhook received and verified"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Script failed with error: {str(e)}")
-
-    return {"status": "success", "message": "Webhook received and verified"}
