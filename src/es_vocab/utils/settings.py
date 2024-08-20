@@ -25,7 +25,7 @@ COLLECTION_TERM_SPECS_LIST_NODE_NAME = "@graph"
 ID_NODE_NAME = "@id"
 TYPE_NODE_NAME = "@type"
 
-SECRET_TOKEN = "tobereplaced"
+SECRET_TOKEN = "tobereplaced"  # TODO: to be replaced!
 
 # API Server settings
 API_SERVER_DOMAINE_NAME = "es-vocab.ipsl.fr"
