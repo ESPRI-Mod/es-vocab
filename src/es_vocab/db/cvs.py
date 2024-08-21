@@ -137,10 +137,10 @@ def _parse_projects(parent_projects_dir_path: Path) -> dict[str, dict[str, dict[
 ######################### DICTIONARIES #########################
 
 # dict[data_descriptor_id: dict[term id, term object]
-TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]]
+TERMS_OF_UNIVERSE: dict[str, dict[str, BaseModel]] = dict()
 
 # dict[project_id: dict[collection_id: dict[term_id: term object]]]
-TERMS_OF_COLLECTIONS_OF_PROJECTS: dict[str, dict[str, dict[str, BaseModel]]]
+TERMS_OF_COLLECTIONS_OF_PROJECTS: dict[str, dict[str, dict[str, BaseModel]]] = dict()
 
 # dict[data_descriptor_id: class]
 DATA_DESCRIPTOR_CLASS: dict[str, BaseModel] = dict()
@@ -150,6 +150,5 @@ DATA_DESCRIPTOR_CLASS: dict[str, BaseModel] = dict()
 def init():
     global TERMS_OF_UNIVERSE
     global TERMS_OF_COLLECTIONS_OF_PROJECTS
-    if TERMS_OF_UNIVERSE is None and TERMS_OF_COLLECTIONS_OF_PROJECTS is None:
-        TERMS_OF_UNIVERSE = _parse_terms_of_universe(settings.DATA_DESCRIPTORS_PARENT_DIR_PATH)
-        TERMS_OF_COLLECTIONS_OF_PROJECTS = _parse_projects(settings.PROJECTS_PARENT_DIR_PATH)
+    TERMS_OF_UNIVERSE = _parse_terms_of_universe(settings.DATA_DESCRIPTORS_PARENT_DIR_PATH)
+    TERMS_OF_COLLECTIONS_OF_PROJECTS = _parse_projects(settings.PROJECTS_PARENT_DIR_PATH)
