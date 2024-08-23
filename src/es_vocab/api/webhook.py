@@ -36,13 +36,13 @@ async def handle_webhook(request: Request):
     # Verify the signature
     verify_signature(body, request.headers)
 
-    # Verify branch main ? TODO: explicite this comment.
+    # Verify branch main ? TODO: externalize the payload filtering.
     payload = json.loads(body)
     if not payload.get("ref") == "refs/heads/main":
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="push in main is not allowed")
 
     try:
-        with open("/update/have_to_restart", "w") as f:
+        with open("/update", "w") as f:
             f.write("1")
 
         return {"status": "success", "message": "Webhook received and verified"}
