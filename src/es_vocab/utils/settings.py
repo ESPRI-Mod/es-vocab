@@ -25,7 +25,8 @@ COLLECTION_TERM_SPECS_LIST_NODE_NAME = "@graph"
 ID_NODE_NAME = "@id"
 TYPE_NODE_NAME = "@type"
 
-SECRET_TOKEN = "tobereplaced"  # TODO: to be replaced!
+SECRET_TOKEN = "tobereplaced"  # TODO: to be replaced by GIT_WEBHOOK_TOKEN_FILE_PATH
+GIT_WEBHOOK_TOKEN_FILE_PATH = "/run/secrets/github_webhook_token"
 
 # API Server settings
 API_SERVER_DOMAINE_NAME = "es-vocab.ipsl.fr"
