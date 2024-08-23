@@ -1,8 +1,8 @@
 name: es-vocab
 
 services:
-    api:
-        image: es-vocab:latest
+    prod:
+        image: es-vocab:prod
         ports:
             - 80:9999
         volumes:
@@ -16,6 +16,12 @@ services:
         secrets:
             - github_webhook_token
         build: .
+
+    update:
+        extends: prod
+        image: es-vocab:tmp
+        ports:
+            - 8080:9999
 
 secrets:
     github_webhook_token:
