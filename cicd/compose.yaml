@@ -1,0 +1,22 @@
+name: es-vocab
+
+services:
+    api:
+        image: es-vocab:latest
+        ports:
+            - 80:9999
+        volumes:
+            - type: bind
+              source: /root/v1/es-vocab/documentation/site
+              target: /var/www/es-vocab/documentation/site
+              read_only: true
+            - type: bind
+              source: /root/v1/update
+              target: /var/www/es-vocab/update
+        secrets:
+            - github_webhook_token
+        build: .
+
+secrets:
+    github_webhook_token:
+        file: ../../github_webhook_token
