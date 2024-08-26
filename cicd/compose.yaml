@@ -17,10 +17,10 @@ services:
             - github_webhook_token
         build: .
 
-    update:
+    test:
         extends: prod
-        image: es-vocab:tmp
-        ports:
+        image: es-vocab:test
+        ports: !override
             - 8080:9999
 
 secrets:
