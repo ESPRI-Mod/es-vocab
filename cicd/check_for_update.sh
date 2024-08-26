@@ -13,7 +13,7 @@ function reset_update_file
     return $?
 }
 
-exit_code=0
+exit_code=0 # TODO: handle specific exit code.
 
 if [ ${documentation} -eq 1 ]; then
     echo -e "\n*** updating documentation ***\n"
@@ -29,5 +29,5 @@ if [ ${service} -eq 1 ]; then
     echo -e "\n*** updating service ***\n"
     { "${SCRIPT_DIR_PATH}/update_service.sh" && reset_update_file 'service' ; } || exit_code=1
 fi
-
+# TODO: should send email or slack message for update or error.
 exit ${exit_code}
