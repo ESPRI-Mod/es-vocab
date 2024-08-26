@@ -64,14 +64,14 @@ docker compose up --detach ${DOCKER_COMPOSE_TEST_TARGET_NAME}
 test_result_code=0
 
 # Whatever the container passes the tests, it must be shutdown.
-docker compose down ${DOCKER_COMPOSE_TEST_TARGET_NAME} # Stop & delete test container.
+docker compose down --volumes ${DOCKER_COMPOSE_TEST_TARGET_NAME} # Stop & delete test container.
 
 if [ ${test_result_code} -eq 0 ]; then
     echo -e "> retag docker test into prod:\n"
     # Retag the test image into prod image.
     docker tag ${DOCKER_IMAGE_NAME_PREFIX}:${DOCKER_COMPOSE_TEST_TARGET_NAME} ${DOCKER_IMAGE_NAME_PREFIX}:${DOCKER_COMPOSE_PROD_TARGET_NAME}
     echo -e "> stop and delete the current prod container:\n"
-    docker compose down prod
+    docker compose down --volumes prod
     echo -e "> start the new prod image:\n"
     docker compose up --detach ${DOCKER_COMPOSE_PROD_TARGET_NAME}
     echo -e "> clean the test environment"
