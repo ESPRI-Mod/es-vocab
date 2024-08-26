@@ -67,14 +67,16 @@ test_result_code=0
 docker compose down --volumes ${DOCKER_COMPOSE_TEST_TARGET_NAME} # Stop & delete test container.
 
 if [ ${test_result_code} -eq 0 ]; then
-    echo -e "> retag docker test into prod:\n"
-    # Retag the test image into prod image.
+    echo -e "> retag docker ${DOCKER_COMPOSE_TEST_TARGET_NAME} into ${DOCKER_COMPOSE_PROD_TARGET_NAME}:\n"
     docker tag ${DOCKER_IMAGE_NAME_PREFIX}:${DOCKER_COMPOSE_TEST_TARGET_NAME} ${DOCKER_IMAGE_NAME_PREFIX}:${DOCKER_COMPOSE_PROD_TARGET_NAME}
-    echo -e "> stop and delete the current prod container:\n"
-    docker compose down --volumes prod
-    echo -e "> start the new prod image:\n"
+
+    echo -e "> stop and delete the current ${DOCKER_COMPOSE_PROD_TARGET_NAME} container:\n"
+    docker compose down --volumes ${DOCKER_COMPOSE_PROD_TARGET_NAME}
+
+    echo -e "> start the new ${DOCKER_COMPOSE_PROD_TARGET_NAME} image:\n"
     docker compose up --detach ${DOCKER_COMPOSE_PROD_TARGET_NAME}
-    echo -e "> clean the test environment"
+
+    echo -e "> clean the ${DOCKER_COMPOSE_TEST_TARGET_NAME} environment"
     # Delete test image: it doesn't impact the newly deployed prod image!
     delete_image ${DOCKER_COMPOSE_TEST_TARGET_NAME}
     # Retagging makes the previous prod image to be untagged, so delete it:
