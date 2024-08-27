@@ -14,20 +14,19 @@ To utilize the SPARQL endpoint, simply send your SPARQL queries to the provided 
 
 you can find a yasgui interface : [https://es-vocab.ipsl.fr/sparql](http://es-vocab.ipsl.fr/sparql)
 
-## Basic query 
+## Basic query
 
 To get all triples in graph :
 
 ```http
-SELECT * 
+SELECT *
 WHERE {?s ?p ?o .}
 ```
 
-## Insitution query
+## Institution query
 
 ```http
 
 SELECT *
 WHERE {?s <http://es-vocab.ipsl.fr/institution/acronyms> ?o .}
 ```
-
