@@ -75,15 +75,12 @@ if [ ${test_result_code} -eq 0 ]; then
 
     echo -e "> start the new ${DOCKER_COMPOSE_PROD_TARGET_NAME} image:\n"
     docker compose up --detach ${DOCKER_COMPOSE_PROD_TARGET_NAME}
-
-    echo -e "> clean the ${DOCKER_COMPOSE_TEST_TARGET_NAME} environment"
-    # Delete test image: it doesn't impact the newly deployed prod image!
-    delete_image ${DOCKER_COMPOSE_TEST_TARGET_NAME}
-    # Retagging makes the previous prod image to be untagged, so delete it:
-    delete_dangling_image
-# TODO: else (handle unpassed tests).
 fi
 
-# TODO: send email or Slack message.
+echo -e "> clean the ${DOCKER_COMPOSE_TEST_TARGET_NAME} environment"
+# Delete test image: it doesn't impact the newly deployed prod image!
+delete_image ${DOCKER_COMPOSE_TEST_TARGET_NAME}
+# Retagging makes the previous prod image to be untagged, so delete it:
+delete_dangling_image
 
 exit 0
