@@ -32,7 +32,9 @@ def create_app() -> FastAPI:
 def run_app(debug=False):
     initialization()
     n_workers = (
-        os.environ[settings.UVICORN_WORKERS_VAR_ENV_NAME] if settings.UVICORN_WORKERS_VAR_ENV_NAME in os.environ else 1
+        int(os.environ[settings.UVICORN_WORKERS_VAR_ENV_NAME])
+        if settings.UVICORN_WORKERS_VAR_ENV_NAME in os.environ
+        else 1
     )
     _LOGGER.info(f"number of uvicorn workers: {n_workers}")
     import uvicorn
