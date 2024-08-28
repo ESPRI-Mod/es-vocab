@@ -4,7 +4,7 @@ RUN apk update && apk upgrade
 
 WORKDIR /var/www
 ADD https://github.com/ESPRI-Mod/es-vocab.git#main es-vocab
-ADD https://github.com/ESPRI-Mod/WGCM_CVs.git#main  WGCM_CVs
+ADD https://github.com/ESPRI-Mod/WGCM_CVs.git#main WGCM_CVs
 
 WORKDIR /var/www/projects
 ADD https://github.com/ESPRI-Mod/CMIP6Plus_CVs.git#main projects/CMIP6Plus_CVs
