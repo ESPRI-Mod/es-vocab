@@ -1,35 +1,24 @@
-name: documentation
-
+name: Publish docs via GitHub Pages
 on:
   pull_request:
     branches:
       - main
 
-
 jobs:
-  documentation:
+  build:
+    name: Deploy docs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout main
+        uses: actions/checkout@v2
 
-      - uses: pdm-project/setup-pdm@main
-        name: setup pdm
-        with:
-          python-version: "3.10"  # Version range or exact version of a Python version to use, the same as actions/setup-python
-          architecture: x64    # The target architecture (x86, x64) of the Python interpreter. the same as actions/setup-python
-          version: 2.1.5       # The version of PDM to install. Leave it as empty to use the latest version from PyPI
-          prerelease: false     # Allow prerelease versions to be installed
-          enable-pep582: true  # Enable PEP 582 package loading globally
-
-      - name: install dependencies
-        run: pdm install --no-default -dG doc
-
-      - name: build
-        run: pdm run mkdocs build -f documentation/mkdocs.yml
-
-      - name: deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./documentation/site
+      - name: Deploy docs
+        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # CUSTOM_DOMAIN: optionaldomain.com
+          CONFIG_FILE: documentation/mkdocs.yml
+          EXTRA_PACKAGES: build-base
+          # GITHUB_DOMAIN: github.myenterprise.com
+          # REQUIREMENTS: folder/requirements.txt
