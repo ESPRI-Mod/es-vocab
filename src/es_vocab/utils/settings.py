@@ -29,6 +29,7 @@ SECRET_TOKEN = "tobereplaced"  # TODO: to be replaced by GIT_WEBHOOK_TOKEN_FILE_
 GIT_WEBHOOK_TOKEN_FILE_PATH = "/run/secrets/github_webhook_token"
 
 # API Server settings
+# May be this should be in a settings file.
 API_SERVER_DOMAINE_NAME = "es-vocab.ipsl.fr"
 UVICORN_WORKERS_VAR_ENV_NAME = "UVICORN_WORKERS"
 UVICORN_PORT = 9999
