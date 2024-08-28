@@ -1,4 +1,4 @@
-FROM python:3.12.3-alpine3.20 AS es-vocab
+FROM python:3.12.3-alpine AS es-vocab
 
 RUN apk update && apk upgrade
 
