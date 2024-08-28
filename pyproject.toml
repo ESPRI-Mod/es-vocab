@@ -51,4 +51,4 @@ log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 
 [tool.pdm.scripts]
-server.call = "es_vocab.server:run_app"
+server.call = "es_vocab.bootstrap:run_app"
