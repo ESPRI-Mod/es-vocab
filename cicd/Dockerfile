@@ -12,4 +12,4 @@ ADD https://github.com/ESPRI-Mod/CMIP6Plus_CVs.git#main projects/CMIP6Plus_CVs
 WORKDIR /var/www/es-vocab
 RUN pip install .
 
-CMD ["python","-c","from es_vocab.server import run_app; run_app()"]
+CMD ["python","-c","from es_vocab.bootstrap import run_app; run_app()"]
