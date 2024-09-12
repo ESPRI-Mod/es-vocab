@@ -17,6 +17,12 @@ def initialization():
     cvs.init()
     urls.create_universe_term_routes()
     urls.create_project_term_routes()
+    
+    # DEBUG
+    from sqlalchemy.ext.asyncio import create_async_engine
+    db_url = 'sqlite+aiosqlite:///db.sqlite'
+    engine = create_async_engine(db_url, echo=False)
+    print(f"engine for {os.getpid()}: {engine}")
 
 
 def create_app() -> FastAPI:
