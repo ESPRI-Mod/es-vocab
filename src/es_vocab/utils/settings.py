@@ -31,7 +31,7 @@ GIT_WEBHOOK_TOKEN_FILE_PATH = "/run/secrets/github_webhook_token"
 # API Server settings
 # May be this should be in a settings file.
 API_SERVER_DOMAINE_NAME = "es-vocab.ipsl.fr"
-UVICORN_WORKERS_VAR_ENV_NAME = "UVICORN_WORKERS"
+UVICORN_WORKERS_VAR_ENV_NAME = "WEB_CONCURRENCY"
 UVICORN_PORT = 9999
 
 #################################### LOGGING ########################################
