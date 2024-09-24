@@ -52,7 +52,7 @@ default_prefix: activity
 
 ```
 * the model classes : 
-Fist thing fist lets name our class like the datadesciptor with a upper first letter.
+First thing first let's name our class like the datadesciptor with a upper first letter.
 ```
 classes:
     Activity:
@@ -86,7 +86,7 @@ here we have to define the model (i.e keys) for our datadescriptor :
 
 
 ```
-ttributes:
+attributes:
             id:
                 slot_uri: activity:id
                 range: string
@@ -182,8 +182,16 @@ Eventually terms a created : an example :
     "url": null
 }
 ```
+## 3. Validate model and terms locally 
 
-## 3. Here Magic happen
+it is possible to validate model and terms locally tahnks to linkml library : 
+for instance : 
+```
+pdm run linkml-validate --schema schemas/activity.yaml --target-class ../../data_descriptors/source/terms/pmip.json
+```
+Or you can let github action do this : 
+
+## 4. Here Magic happen
 
 ### Push changes
 
@@ -200,7 +208,7 @@ then in github interface on [WGCM_CVs repository](https://github.com/ESPRI-Mod/W
 
 #### CI/CD : Validation 
 
-You have to wait for CI/CD to test that everything is good, if not the merge will be **cancel** ! 
+You have to wait for CI/CD to check that everything is good, if not the merge will be **cancel** ! 
 
 what does the CI/CD : 
 
