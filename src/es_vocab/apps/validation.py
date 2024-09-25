@@ -8,30 +8,27 @@ import re
 router = APIRouter(prefix="/app/valid")
     
 
-def is_datadescriptor_exist(datadescriptor_id:str) -> bool:
-    
-    
+def is_datadescriptor_exist(datadescriptor_id:str) : 
     # the idea of decoupled test is to be able to do fuzzy search to return message like 'did you mean something ?' 
     if datadescriptor_id in list(cvs.TERMS_OF_UNIVERSE.keys()):
-        return True
+        return cvs.TERMS_OF_UNIVERSE[datadescriptor_id]
     ## fuzzy loukout will be here
     return False
 
-def is_datadescriptor_term_exist(datadescriptor_id:str, term_id:str) -> bool:
-
+def is_datadescriptor_term_exist(datadescriptor_id:str, term_id:str) :
     # same idea as above
     if datadescriptor_id in list(cvs.TERMS_OF_UNIVERSE.keys()):
         if term_id in list(cvs.TERMS_OF_UNIVERSE[datadescriptor_id].keys()):
-            return True
+            return cvs.TERMS_OF_UNIVERSE[datadescriptor_id][term_id]
     return False
 
 
-def is_valid(input_term_id:str, term:Any)-> bool:
+def is_valid(input_term_id:str, term:Any) :
 # Any cause Pydantic model could be any of each datadescriptor
     # the simple case => validation_method = "list"
     if term.validation_method=="list":
         if term.id==input_term_id:
-            return True
+            return term
     # the regex option
     if term.validation_method=="regex":
         match = re.match(term.regex,input_term_id)
@@ -52,15 +49,18 @@ def is_valid(input_term_id:str, term:Any)-> bool:
         else:
             pass # TODO have to consider when separator ="" like in variant_label => for now .. doesnt work
         
+        founds = [] 
         for i, part in enumerate(term.parts):
             dd,t = get_datadescriptor_term_from_short_uri(part.id)
             #print(dd,t)
+            founds.append([])
             found_corresponding = False
             if t is None: # every term in this universe dd could be use
                 for key,item in cvs.TERMS_OF_UNIVERSE[dd].items():
                     if is_valid(input_parts[i],item):
                         print("term found in dd :", input_parts[i], key)
                         found_corresponding = True
+                        founds[i].append((input_parts[i], item))
                
                 if found_corresponding is not False:
                     continue
@@ -70,8 +70,10 @@ def is_valid(input_term_id:str, term:Any)-> bool:
                 return False
             
             if t is not None: # only one term is possible inside this part of this composite
-                pass # TODO implement this case 
-        return True
+                pass # TODO implement this case
+        print(f"FOUNDS FOR {input_term_id}") 
+        print(founds)
+        return founds
     return False
 
 def get_datadescriptor_term_from_short_uri(short_uri:str):
@@ -86,20 +88,20 @@ def is_valid_on_all(input_term_id:str):
     # depends on validation_method (recursive) => need function 
     res =  {}
     res["valid"] = False
+    res["why"] = None
     res["valid_term"] = None
-    res["found_multiple"] = False
-    res["multiple_match_terms"] = []
-    for dd in list(cvs.TERMS_OF_UNIVERSE.keys()):
-        print("trying to fing it in :",dd)
-        for k,t in cvs.TERMS_OF_UNIVERSE[dd].items():
-            
-            if is_valid(input_term_id,t):
-                if res["valid"]:
-                    res["found_multiple"]=True
-                    res["multiple_match_terms"].append(t)
-                else:
 
-                    res["valid term"]=t
-                    res["valid"]=True
+    
+    for dd in list(cvs.TERMS_OF_UNIVERSE.keys()):
+        print(f"trying to find {input_term_id} in {dd}")
+        for k,t in cvs.TERMS_OF_UNIVERSE[dd].items():
+            valid =is_valid(input_term_id,t)
+
+            print(k,t)
+            if valid :
+                res["valid_term"]=t
+                res["valid"]=True
+                res["why"] = valid
             
+
     return res   
