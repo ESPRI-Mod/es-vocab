@@ -81,7 +81,7 @@ def get_datadescriptor_term_from_short_uri(short_uri:str):
 
 
 
-@router.get("{input_term_id}")
+@router.get("/{input_term_id}")
 def is_valid_on_all(input_term_id:str):
     # depends on validation_method (recursive) => need function 
     res =  {}
