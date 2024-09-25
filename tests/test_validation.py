@@ -18,12 +18,14 @@ def test_unit_validation_match_term():
     assert is_valid("tavg-h02-hxy-x",cvs.TERMS_OF_UNIVERSE["branded_label"]["label"])
     assert is_valid("tsum-rho00p5-hys-tree",cvs.TERMS_OF_UNIVERSE["branded_label"]["label"])
 
+   
     assert not is_valid("toto-h02-hxy-x",cvs.TERMS_OF_UNIVERSE["branded_label"]["label"])
     assert not is_valid("tavg-toto-hxy-x",cvs.TERMS_OF_UNIVERSE["branded_label"]["label"])
     assert not is_valid("tavg-h02-toto-x",cvs.TERMS_OF_UNIVERSE["branded_label"]["label"])
     assert not is_valid("tavg-h02-hxy-toto",cvs.TERMS_OF_UNIVERSE["branded_label"]["label"])
 
     assert is_valid("tsum-rho0p5-hys-tree",cvs.TERMS_OF_UNIVERSE["branded_label"]["label"])
+   
 
 def test_over_all_terms():
 
@@ -32,4 +34,4 @@ def test_over_all_terms():
 
     assert not is_valid_on_all("toto")["valid"]
 
-
+    
