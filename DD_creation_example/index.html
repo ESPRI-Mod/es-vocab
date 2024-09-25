@@ -1,0 +1,1176 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../api_basics.html">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Datadescriptor creation - es-vocab documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#adding-a-new-datadescriptor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="es-vocab documentation" class="md-header__button md-logo" aria-label="es-vocab documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            es-vocab documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Datadescriptor creation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="es-vocab documentation" class="md-nav__button md-logo" aria-label="es-vocab documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    es-vocab documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../restapi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sparqlendpoint/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPARQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../website/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebSite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api_basics.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API_example
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Admin
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Admin
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Datadescriptor creation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Datadescriptor creation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-define-the-linkml-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Define the Linkml model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Define the Linkml model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-actual-universe-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      get actual Universe repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swith-to-a-new-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      swith to a new branch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-define-the-linkml-model_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Define the linkml model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Define the linkml model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copy-existing-similar-data-descriptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy existing similar data descriptor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changes-according-to-our-new-data-descriptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changes according to our new data descriptor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-define-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Define terms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-validate-model-and-terms-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Validate model and terms locally
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-here-magic-happen" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Here Magic happen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Here Magic happen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#push-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Push changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cicd-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      CI/CD : Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-instance-with-this-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      for instance with this procedure :
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a pull request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-magic" class="md-nav__link">
+    <span class="md-ellipsis">
+      The magic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-projects-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Define projects collection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Define projects collection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      clone the repo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-new-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      create a new branch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      create collection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      push change
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#let-magic-happen" class="md-nav__link">
+    <span class="md-ellipsis">
+      let Magic happen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test it
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-define-the-linkml-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Define the Linkml model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Define the Linkml model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-actual-universe-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      get actual Universe repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swith-to-a-new-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      swith to a new branch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-define-the-linkml-model_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Define the linkml model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Define the linkml model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copy-existing-similar-data-descriptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy existing similar data descriptor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changes-according-to-our-new-data-descriptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changes according to our new data descriptor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-define-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Define terms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-validate-model-and-terms-locally" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Validate model and terms locally
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-here-magic-happen" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Here Magic happen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Here Magic happen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#push-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Push changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cicd-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      CI/CD : Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-instance-with-this-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      for instance with this procedure :
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a pull request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-magic" class="md-nav__link">
+    <span class="md-ellipsis">
+      The magic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#define-projects-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Define projects collection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Define projects collection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-the-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      clone the repo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-new-branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      create a new branch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      create collection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      push change
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#let-magic-happen" class="md-nav__link">
+    <span class="md-ellipsis">
+      let Magic happen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test it
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="adding-a-new-datadescriptor">Adding a new datadescriptor</h1>
+<p>Lets take an example to illustrate the procedure : 
+we will add the <strong>activity</strong> datadescriptor</p>
+<h2 id="1-define-the-linkml-model">1. Define the Linkml model</h2>
+<p>the linkml model permits to automate differents things that are usefull to deal with the controled vocabulary: </p>
+<ul>
+<li>generate jsonschema model, generate pydantic model. Depends on what you prefer</li>
+<li>generate jsonld </li>
+<li>validation of terms </li>
+</ul>
+<h3 id="get-actual-universe-repository">get actual Universe repository</h3>
+<pre><code>git clone https://github.com/ESPRI-Mod/WGCM_CVs.git
+</code></pre>
+<h3 id="swith-to-a-new-branch">swith to a new branch</h3>
+<pre><code>git checkout -b newDD
+</code></pre>
+<h2 id="1-define-the-linkml-model_1">1. Define the linkml model</h2>
+<p>the linkml models are in the directory "src/wgcm_cvs/schemas". we can look at one similar datadescriptor in order to create the new one. There 3 distincts methods to define the CVs : </p>
+<ul>
+<li>list of valid terms</li>
+<li>a regex to valid a term </li>
+<li>a composite that can be a composition of the previous one.</li>
+</ul>
+<h3 id="copy-existing-similar-data-descriptor">Copy existing similar data descriptor</h3>
+<p>in our example <strong>activity</strong>. This a list of valid term.  <strong>institution.yaml</strong> is also a list of term. this will be our starting point. Lets copy the latter as <strong>activity.yaml</strong>.</p>
+<h3 id="changes-according-to-our-new-data-descriptor">Changes according to our new data descriptor</h3>
+<ul>
+<li>id : change the id and the name accordindly</li>
+<li>the prefixes used by the web semantic part of the service is pretty defined. just change the <strong>institution</strong> in <strong>activity</strong> in the key and the value : </li>
+</ul>
+<pre><code>activity:  http://es-vocab.ipsl.fr/activity/
+
+</code></pre>
+<ul>
+<li>change the default prefix to freshly created :</li>
+</ul>
+<pre><code>default_prefix: activity
+
+</code></pre>
+<ul>
+<li>the model classes : 
+First thing first let's name our class like the datadesciptor with a upper first letter.</li>
+</ul>
+<pre><code>classes:
+    Activity:
+
+</code></pre>
+<p>lets add a <em>description</em> : what is an activty ? </p>
+<pre><code>description :an 'activity' refers to a coordinated set of modeling experiments designed to address specific scientific questions or objectives. Each activity is focused on different aspects of climate science and utilizes various models to study a wide range of climate phenomena. Activities are often organized around key research themes and may involve multiple experiments, scenarios, and model configurations.
+</code></pre>
+<p><em>class_uri</em> is used to define the appropriate type in the context of web semantic : lets use our prefix and datadescriptor name : </p>
+<pre><code>class_uri: esvocab:activity
+
+</code></pre>
+<p>the main course: the attibutes.</p>
+<p>the basic one :</p>
+<ul>
+<li>change the slot_uri </li>
+<li>validation_method doesn't have to change since we have started from a descriptor that have the same validation method . here a <strong>list of terms</strong></li>
+</ul>
+<p>here we have to define the model (i.e keys) for our datadescriptor :
+<strong>activity</strong> is defined with a standard <em>acronym</em> and a <em>long name. We just have to keep </em><em>name</em><em> thats will be the same as </em><em>cmip_acronym</em><em> and create a </em><em>long_name</em><em>. In the new CMIP6Plus CV, there is also an url to document the activity. Lets add a </em><em>url</em>* attribute to our model    </p>
+<pre><code>attributes:
+            id:
+                slot_uri: activity:id
+                range: string
+                required: true
+                identifier: true
+
+            validation_method :
+                required: true
+                range : string
+                ifabsent: string(list)
+                slot_uri: es-vocab:validation_method
+
+            name:
+                range: string
+                required: true
+
+            long_name:
+                range: string
+                required: true
+
+            cmip_acronym:
+                range: string
+                required: true
+
+            url:
+                range : string
+                required: false
+</code></pre>
+<p>the linkml model is defined. This will be used by the repository to validate the defined standard terms.</p>
+<h2 id="2-define-terms">2. Define terms</h2>
+<p>As a starting point for <strong>activity</strong> terms.
+we will use the known activities from CMIP6 and CMIP6Plus : </p>
+<p>for CMIP6 : </p>
+<pre><code>&quot;activity_id&quot;:{
+        &quot;AerChemMIP&quot;:&quot;Aerosols and Chemistry Model Intercomparison Project&quot;,
+        &quot;C4MIP&quot;:&quot;Coupled Climate Carbon Cycle Model Intercomparison Project&quot;,
+        &quot;CDRMIP&quot;:&quot;Carbon Dioxide Removal Model Intercomparison Project&quot;,
+        &quot;CFMIP&quot;:&quot;Cloud Feedback Model Intercomparison Project&quot;,
+        &quot;CMIP&quot;:&quot;CMIP DECK: 1pctCO2, abrupt4xCO2, amip, esm-piControl, esm-historical, historical, and piControl experiments&quot;,
+        &quot;CORDEX&quot;:&quot;Coordinated Regional Climate Downscaling Experiment&quot;,
+        &quot;DAMIP&quot;:&quot;Detection and Attribution Model Intercomparison Project&quot;,
+        &quot;DCPP&quot;:&quot;Decadal Climate Prediction Project&quot;,
+        &quot;DynVarMIP&quot;:&quot;Dynamics and Variability Model Intercomparison Project&quot;,
+        &quot;FAFMIP&quot;:&quot;Flux-Anomaly-Forced Model Intercomparison Project&quot;,
+        &quot;GMMIP&quot;:&quot;Global Monsoons Model Intercomparison Project&quot;,
+        &quot;GeoMIP&quot;:&quot;Geoengineering Model Intercomparison Project&quot;,
+        &quot;HighResMIP&quot;:&quot;High-Resolution Model Intercomparison Project&quot;,
+        &quot;ISMIP6&quot;:&quot;Ice Sheet Model Intercomparison Project for CMIP6&quot;,
+        &quot;LS3MIP&quot;:&quot;Land Surface, Snow and Soil Moisture&quot;,
+        &quot;LUMIP&quot;:&quot;Land-Use Model Intercomparison Project&quot;,
+        &quot;OMIP&quot;:&quot;Ocean Model Intercomparison Project&quot;,
+        &quot;PAMIP&quot;:&quot;Polar Amplification Model Intercomparison Project&quot;,
+        &quot;PMIP&quot;:&quot;Palaeoclimate Modelling Intercomparison Project&quot;,
+        &quot;RFMIP&quot;:&quot;Radiative Forcing Model Intercomparison Project&quot;,
+        &quot;SIMIP&quot;:&quot;Sea Ice Model Intercomparison Project&quot;,
+        &quot;ScenarioMIP&quot;:&quot;Scenario Model Intercomparison Project&quot;,
+        &quot;VIACSAB&quot;:&quot;Vulnerability, Impacts, Adaptation and Climate Services Advisory Board&quot;,
+        &quot;VolMIP&quot;:&quot;Volcanic Forcings Model Intercomparison Project&quot;
+    },
+</code></pre>
+<p>for CMIP6Plus : </p>
+<pre><code>&quot;CMIP&quot;: {
+            &quot;URL&quot;: &quot;https://gmd.copernicus.org/articles/9/1937/2016/gmd-9-1937-2016.pdf&quot;,
+            &quot;long_name&quot;: &quot;CMIP DECK: 1pctCO2, abrupt4xCO2, amip, esm-piControl, esm-historical, historical, and piControl experiments&quot;
+        },
+        &quot;LESFMIP&quot;: {
+            &quot;URL&quot;: &quot;https://www.frontiersin.org/articles/10.3389/fclim.2022.955414/full&quot;,
+            &quot;long_name&quot;: &quot;The Large Ensemble Single Forcing Model Intercomparison Project&quot;
+        }
+</code></pre>
+<p>in the directory "data_decriptor" : create a <strong>activity/terms</strong> directories. Inside one term is define in one json file.</p>
+<p>We will use a python script to create those. a little script to do that is stored in "script/DD_specific/create_activity.py". 
+Eventually terms a created : an example : 
+<strong>pmip.json</strong></p>
+<pre><code>{
+    &quot;id&quot;: &quot;pmip&quot;,
+    &quot;cmip_acronym&quot;: &quot;PMIP&quot;,
+    &quot;long_name&quot;: &quot;Palaeoclimate Modelling Intercomparison Project&quot;,
+    &quot;url&quot;: null
+}
+</code></pre>
+<h2 id="3-validate-model-and-terms-locally">3. Validate model and terms locally</h2>
+<p>it is possible to validate model and terms locally tahnks to linkml library : 
+for instance : </p>
+<pre><code>pdm run linkml-validate --schema schemas/activity.yaml --target-class ../../data_descriptors/source/terms/pmip.json
+</code></pre>
+<p>Or you can let github action do this : </p>
+<h2 id="4-here-magic-happen">4. Here Magic happen</h2>
+<h3 id="push-changes">Push changes</h3>
+<pre><code>git commit -am &quot;create activity datadescriptor and terms&quot;
+git push --set-upstream origin activityDD
+
+</code></pre>
+<h3 id="validation">validation</h3>
+<p>then in github interface on <a href="https://github.com/ESPRI-Mod/WGCM_CVs">WGCM_CVs repository</a></p>
+<h4 id="cicd-validation">CI/CD : Validation</h4>
+<p>You have to wait for CI/CD to check that everything is good, if not the merge will be <strong>cancel</strong> ! </p>
+<p>what does the CI/CD : </p>
+<ul>
+<li>create pydantic and jsonscheme model in "datadescriptors/activity/models"</li>
+<li>create the jsonld file version of each terms in "datadesciptors/activity/terms"</li>
+<li>validate the terms with the models.</li>
+</ul>
+<p>validation CI/CD can be view in <strong>Action</strong> tab.</p>
+<h4 id="for-instance-with-this-procedure">for instance with this procedure :</h4>
+<p>the validate failed because there was a type in the linkml file name ! </p>
+<p>the validate failed cause of pydantic model why ? here the problem need to be tested in local. 
+we can run the model creation and validate script : </p>
+<pre><code>pdm run python scripts/generate_models.py
+</code></pre>
+<p>the models are stored next to terms, i cant see problem with the model. lets try to validate locally </p>
+<pre><code>pdm run python scripts/validate.py
+</code></pre>
+<p>it validates everythings through json schema but not pydantic : </p>
+<pre><code>Field required [type=missing, input_value={'id': 'aerchemmip', 'cmi...n Project', 'url': None}, input_type=dict]
+</code></pre>
+<p>there is a missing field, after investigation : the python script that create the terms does not include <strong>name</strong> attribute. Lets repair that !</p>
+<pre><code>pdm run python scripts/validate.py
+</code></pre>
+<p>YES !, validation is OK !
+lets push changes to the origin repository</p>
+<h3 id="create-a-pull-request">Create a pull request</h3>
+<p>if validation step went well, create a pull request. This will be merged into main asap. </p>
+<h3 id="the-magic">The magic</h3>
+<p>github repository is configured to send a message to the CV Service. It will be update automaticaly !!! </p>
+<h2 id="define-projects-collection">Define projects collection</h2>
+<p>Each project does not necesseraly use or even valid all the terms in the univers data descriptor. collections of valid id have to be define in each project : </p>
+<p>for instance, we will add activity collection id for CMIP6Plus_CVs : </p>
+<h3 id="clone-the-repo">clone the repo</h3>
+<pre><code>git clone https://github.com/ESPRI-Mod/CMIP6Plus_CVs.git
+</code></pre>
+<h3 id="create-a-new-branch">create a new branch</h3>
+<pre><code>git checkout -b activity
+</code></pre>
+<h3 id="create-collection">create collection</h3>
+<p>in directory collections :
+Lets start from the institution.json and copy it as activity.json</p>
+<pre><code>{
+&quot;@context&quot;:{ 
+    &quot;@base&quot;: &quot;http://es-vocab.ipsl.fr/Institution&quot;
+    },
+&quot;@graph&quot;:[
+  {&quot;@id&quot;:&quot;ipsl&quot;,
+   &quot;@type&quot;:&quot;institution&quot;,
+   &quot;name&quot; : &quot;Institut Pierre-Simon Laplace modified&quot;, 
+   &quot;location&quot;:{
+       &quot;city&quot;:&quot;Paris5&quot;
+        },
+    &quot;myprop&quot;:&quot;42&quot;
+  },
+  {
+    &quot;@id&quot;:&quot;llnl&quot;,
+    &quot;@type&quot;:&quot;institution&quot;}
+    ]
+}
+</code></pre>
+<p>this one is a show case to view the possibility to change metadata from universe or even add a new key in the metadata. The CV_service takes into account this specifity ! </p>
+<p>so for the activity, we can use the terms in universe as it. </p>
+<ul>
+<li>change the context : just change the end of the "base" into the data descriptor name :</li>
+</ul>
+<pre><code>&quot;@base&quot;: &quot;http://es-vocab.ipsl.fr/Activity&quot;
+    }
+</code></pre>
+<ul>
+<li>in the graph, add the list of id from universe that we need for CMIP6Plus. For now there are only 2 ( CMIP, LESFMIP). We will do it by hand. </li>
+</ul>
+<pre><code>{
+&quot;@context&quot;:{ 
+    &quot;@base&quot;: &quot;http://es-vocab.ipsl.fr/Activity&quot;
+    },
+&quot;@graph&quot;:[
+  {&quot;@id&quot;:&quot;cmip&quot;,
+   &quot;@type&quot;:&quot;activity&quot;
+     },
+  {
+    &quot;@id&quot;:&quot;lesmip&quot;,
+    &quot;@type&quot;:&quot;activity&quot;}
+    ]
+}
+</code></pre>
+<h3 id="push-change">push change</h3>
+<pre><code>git add .
+git commmit -m &quot;add activity collection&quot;
+git push --set upstream origin activity
+</code></pre>
+<p>and create pull request in github interface that will be done asap.</p>
+<h3 id="let-magic-happen">let Magic happen</h3>
+<p>the github CI/CD will inform the CV service to restart. </p>
+<h3 id="test-it">Test it</h3>
+<p>to test the cv service is up to date, we will use a simple curl to the API. documentation about the api is here : <a href="http://es-vocab.ipsl.fr/docs">http://es-vocab.ipsl.fr/docs</a>  </p>
+<pre><code>
+curl -X 'GET' \                                                             
+  'http://es-vocab.ipsl.fr/api/project/CMIP6Plus_CVs/collection/activity/term' \
+  -H 'accept: application/json'
+</code></pre>
+<p>2 problems : 
+* activity in CMIP6 in fact <strong>activity_id</strong>. Just change the name of the collection file. It will still select id from the <strong>activity</strong> data descriptor in WGCM_CVs</p>
+<ul>
+<li>there is not lesmip, it is a type during the procedure. it is lesfmip. Change the id inside the collection</li>
+</ul>
+<pre><code>curl -X 'GET' \                                                             
+  'http://es-vocab.ipsl.fr/api/project/CMIP6Plus_CVs/collection/activity_id/term' \
+  -H 'accept: application/json'
+</code></pre>
+<p>result : </p>
+<p>["cmip","lesfmip"] </p>
+<p>Perfect ! </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+        <script src="../search/main.js"></script>
+      
+    
+  </body>
+</html>
