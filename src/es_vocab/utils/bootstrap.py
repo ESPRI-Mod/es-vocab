@@ -16,7 +16,7 @@ def run_app():
     import uvicorn
 
     uvicorn.run(
-        app="src.es_vocab.server:app",
+        app="src.es_vocab.utils.server:app",
         host="0.0.0.0",
         port=settings.UVICORN_PORT,
         proxy_headers=True,
