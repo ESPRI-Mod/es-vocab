@@ -4,7 +4,7 @@ import os
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-import es_vocab.api.sparql as spq
+#import es_vocab.api.sparql as spq
 import es_vocab.api.urls as urls
 import es_vocab.db.cvs as cvs
 from es_vocab.api import create_api_app, webhook

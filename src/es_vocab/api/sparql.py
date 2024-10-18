@@ -2,11 +2,12 @@ from rdflib import Graph
 from rdflib_endpoint import SparqlRouter
 
 import es_vocab.utils.settings as settings
-
+from pathlib import Path
 SPARQL_ROOT_PATH = "/sparql"
 
 g = Graph()
-g.parse(settings.GRAPH_DIR_PATH / "es-vocab.ttl")
+if (Path(settings.GRAPH_DIR_PATH / "es-vocab.ttl").exists()):
+    g.parse(settings.GRAPH_DIR_PATH / "es-vocab.ttl")
 
 
 sparql_router = SparqlRouter(
