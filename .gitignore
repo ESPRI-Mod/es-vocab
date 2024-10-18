@@ -37,3 +37,4 @@ MANIFEST
 *.sqlite3
 *.duckdb
 site/
+sb.py

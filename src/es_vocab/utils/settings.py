@@ -7,8 +7,8 @@ from pathlib import Path
 DIRNAME_AND_FILENAME_SEPARATOR = "_"
 
 # Paths in universe repository:
-UNIVERSE_DIR_PATH = Path("../WGCM_CVs")
-DATA_DESCRIPTORS_PARENT_DIR_PATH = UNIVERSE_DIR_PATH.joinpath("data_descriptors")
+UNIVERSE_DIR_PATH = Path("../mip_cmor_tables")
+DATA_DESCRIPTORS_PARENT_DIR_PATH = UNIVERSE_DIR_PATH.joinpath("datadescriptor")
 PYDANTIC_MODEL_DIRNAME = "models"
 TERMS_DIRNAME = "terms"
 
@@ -32,7 +32,7 @@ GIT_WEBHOOK_TOKEN_FILE_PATH = "/run/secrets/github_webhook_token"
 # May be this should be in a settings file.
 API_SERVER_DOMAINE_NAME = "es-vocab.ipsl.fr"
 UVICORN_WORKERS_VAR_ENV_NAME = "UVICORN_WORKERS"
-UVICORN_PORT = 9999
+UVICORN_PORT = 9990
 
 #################################### LOGGING ########################################
 
